@@ -9,9 +9,13 @@ suppose you have your website called "mango.com", If some hacker can able to inj
 **Vulnarabilities:**
 
   1.User session hijacking: (Like the cookie got leaked)
+  
   2.UnAuthorised activiy :
+  
   3.capturing Keystrokes: (Somehas has injected a script to know what you are typing)
+  
   4.Stealing critical Information: (Capturing DOM directly)
+  
   5.Phishing attack:
 
 **With XSS these vulnarabilities might be direct threat to your secured data.**
