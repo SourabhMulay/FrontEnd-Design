@@ -143,6 +143,7 @@ This will goin to create a post request on your own application and just send th
 
 suppose from query param above we having. suppose i have written a code or query param in such a way that i'll trigger the method post with some title or some params then it'll again thread to the security.
 
+and bro the request is goin on behalf of you so there is no cross origin so function post will be sucessfully getting executed so it will be havoc.
 
 #### Capturing Keystrokes:
 <hr>
