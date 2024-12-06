@@ -366,6 +366,8 @@ Check on Browser:
 
 <img width="1314" alt="image" src="https://github.com/user-attachments/assets/02bfbbb2-20c0-4aea-aec6-73f53955fc77">
 
-Yaah it has blocked the unsecire script.
+Yaah it has blocked the unsecire script. report-to or report-uri in the csp headers only work with https.
+
+
 
 
