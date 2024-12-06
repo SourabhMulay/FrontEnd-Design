@@ -1,5 +1,5 @@
 
-## Cross Site Script Attack
+# Cross Site Script Attack
 
 
 What is XSS?? Suppose you're on some domain or website saurabh.com and someone from outside inject malicious code to do something unintended then you'll get funcked off that is called Cross site script.
