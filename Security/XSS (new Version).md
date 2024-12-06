@@ -216,3 +216,86 @@ To track the Xss attacks.
 
 **Try to setup the Small Node Server:**
 
+Express Server:
+
+````js
+
+import e from "express";
+const app= new e();
+console.log(app);
+app.listen(3000, function(){
+    console.log('server started')
+})
+
+````
+
+Sending file/html file as a response:
+
+```js
+import e from "express";
+const app= new e();
+app.get('/', function(req,res)
+   res.sendFile(import.meta.dirname+'/index.html');
+})
+app.listen(3000, function(){
+    console.log('server started');
+})
+```
+
+Here is the html file that we are serving:
+````html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample</title>
+    <script src="http://unsecure.com/abc.js"></script>
+</head>
+<body>
+    <h1>server started</h1>
+</body>
+</html>
+````
+
+above you can see I have mentioned a script Tag and I am loading the script from a src/source which is unsecure.com or some unsecure source.
+
+In our case the script has been blocked by browser but many time it'll get executed.!!!So set the CSP headers in the server bro.
+<img width="724" alt="image" src="https://github.com/user-attachments/assets/42446401-5613-4394-871d-8accb3c78aea">
+
+Setting the csp headers so blocking 3rd party scripts!!!
+
+It failed to load the script if you set the csp headers and said conten-security-policy to default-src 'self'. mean load the resources from default source only (Maybe in our case it's localhost'
+
+<img width="1725" alt="image" src="https://github.com/user-attachments/assets/d8aaddda-d035-4a46-a189-abeae8b05f14">
+
+Code:
+(Use of middleware)
+
+```js
+import e from "express";
+
+const app= new e();
+
+app.use(csp);
+
+function csp(req,res,next){
+    res.setHeader(
+        'Content-Security-Policy',
+        "default-src 'self'"
+    )
+    next();
+}
+
+app.get('/', function(req,res){
+    console.log(res);
+   res.sendFile(import.meta.dirname+'/index.html');
+})
+
+
+app.listen(3000, function(){
+    console.log('server started');
+})
+```
+
+
