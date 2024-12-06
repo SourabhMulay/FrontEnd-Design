@@ -298,4 +298,74 @@ app.listen(3000, function(){
 })
 ```
 
+At script level make it more Flexible:
+
+so you can say "default-src 'self'" + "script-src 'self' 'http:unsecure.com'". So it'll load the script from that domain as well.
+
+```js
+function csp(req,res,next){
+    res.setHeader(
+        'Content-Security-Policy',
+        "default-src 'self';"+"script-src 'self' 'unsafe-inline' http://unsecure.com;"
+    )
+    next();
+}
+
+```
+What if I write inplace script, how i Can execute or allow those??? Use script allow by using "script-src 'unsafe-inline'" this will allow the inline script to run.
+
+So there might be possibility that you are running the inline scripts and maybe some of script got injected in betn  and that is not secure, What should we do or how we could avoid it using CSP headers. We can use nonce.
+
+Let's look at how?
+
+````html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample</title>
+    <script src="http://unsecure.com/abc.js"></script>
+
+    <script nonce="RandomKey">
+        console.log('Inline Secure Script');
+    </script>
+    <script>
+        console.log('inLine unsecure script');
+    </script>
+</head>
+<body>
+    <h1>server started</h1>
+</body>
+</html>
+````
+
+here we have 2 script tags where 2nd one is not secure, But for our secure inline js we mentioned nonce=<any key> So now that nonce we'll validate using CSP. mentioning "script-tag 'nonce-RandomKey'" will pass the check and execute the inline secure script while blocking the unsecure script.
+
+
+```
+import e from "express";
+const app= new e();
+app.use(csp);
+function csp(req,res,next){
+    res.setHeader(
+        'Content-Security-Policy',
+        "default-src 'self';"+"script-src 'self' 'unsafe-inline' 'nonce-RandomKey' http://unsecure.com;"
+    )
+    next();
+}
+app.get('/', function(req,res){
+    console.log(res);
+   res.sendFile(import.meta.dirname+'/index.html');
+})
+app.listen(3000, function(){
+    console.log('server started');
+})
+```
+Check on Browser:
+
+<img width="1314" alt="image" src="https://github.com/user-attachments/assets/02bfbbb2-20c0-4aea-aec6-73f53955fc77">
+
+Yaah it has blocked the unsecire script.
+
 
