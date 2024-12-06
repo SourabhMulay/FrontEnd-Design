@@ -368,6 +368,9 @@ Check on Browser:
 
 Yaah it has blocked the unsecire script. report-to or report-uri in the csp headers only work with https.
 
+One more thing to mitigate the XSS is ...Avoid Using eval()  it's a function than can execute any js file or code.
+
+
 
 
 
