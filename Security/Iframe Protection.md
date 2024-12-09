@@ -19,7 +19,7 @@ Let's try some logic. We'll be having server 1 and server 2. Server 1 is parent 
 
 Server1:
 
-```[js, html]
+```{js,html}
 index.js
 
 ```
