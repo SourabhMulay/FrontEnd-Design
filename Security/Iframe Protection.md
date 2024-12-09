@@ -17,3 +17,9 @@ vulnarabilities:
 
 Let's try some logic. We'll be having server 1 and server 2. Server 1 is parent and 2 will be a child window or client.
 
+Server1:
+
+```[js, html]
+index.js
+
+```
