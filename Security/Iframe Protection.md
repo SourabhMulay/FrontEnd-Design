@@ -95,6 +95,8 @@ app.listen(3002, function(){
 
  I am too bad with css so Try combining those two HTML and keep the servr2's repose opacity to zero so overlay will not show any content of click here page. And this is the click hijacking!!!
 
- 
+<hr>
+
+
 
 
