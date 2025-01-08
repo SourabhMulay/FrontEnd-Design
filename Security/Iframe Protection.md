@@ -97,6 +97,33 @@ app.listen(3002, function(){
 
 <hr>
 
+What if the Iframe which We are injected in our site is retrieving the data from our site!! I can get the parent window or dom using
 
+```
+const parentWindow=window.parent;
+const parentDoc=parentWindow.document;
 
+```
 
+Now a days the browsers blocking this using cross domain, So cross domain the document or window.doc will not get shared. But in older browsers may fucked up!!! But you should not trust this and must take action against such malecious activities.
+
+How we can save this??
+We'll have some headers to avoid this.
+
+If we are the website owner!!! or Suppose I am a Owner of some iframe! and i dont want it to be rendered anywhere randomly. Try the example by adding src as www.google.com and add it as an iframe to your site. I will not allow!!.
+
+There is header x-frame-options which is sameorigin. 
+
+2 headers here can help!!!
+
+1. X-Frame-Options (deny or sameorigin options will be available)
+2. frame-ancestors (its a csp header so 'self' or may other option will available) 
+
+You know how to set the headers in middleware!!
+
+```
+app.use((req,res,next)=>{
+    res.serHeaders('content-security-policy',"frame-ancestor 'self'");
+    next();
+})
+```
