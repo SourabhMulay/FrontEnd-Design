@@ -123,7 +123,35 @@ You know how to set the headers in middleware!!
 
 ```
 app.use((req,res,next)=>{
-    res.serHeaders('content-security-policy',"frame-ancestor 'self'");
+    res.serHeaders('content-security-policy',"frame-ancestors 'self'");
     next();
 })
 ```
+So it will block the access!! so you cannot inject your application anywhere!! 
+
+Check sandbox parameter as well. <a src="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/sandbox">Check this</a>. this will provide the extra set of restrictions to an I frame. 
+
+So one of mitigation will be use sandbox Iframe!!.
+
+What if the parent try to stole something from child! Now a days if you wanted a cross domain communication browsers sugges to use the postmessage and does not allow direct access. 
+
+###### How to avoid cookie theft??
+enable these below things in cookie...
+
+````
+
+qpp.use((req,res,next)=>{
+    res.cookie('sessionID', '12345',
+    {
+        httpOnly:true,
+        secure:true,
+        sameSite:'strict',
+    }      
+})
+
+````
+
+These httpOnly, secure and samesite will must set for cookie...if set httponly then you cant access it using document.cookie.
+
+<hr>
+
