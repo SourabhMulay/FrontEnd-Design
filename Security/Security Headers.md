@@ -48,5 +48,17 @@
 
       So now for every Subsequent request sending from browser to http then that header was already set and browser will understood itself and directly redirect to https.
 
+      ```
+      //for first request:
 
+      const redirectHtpps= (req, res, next)=>{
+      if(req.headers['X-forwarded-proto']!=='https'){
+         return res.redirect(['https://', req.get('Host'), req.url].join(''));
+      }
+      next();
+      };
+
+      app.use(redirectHttps);
+      
+      ```
    
