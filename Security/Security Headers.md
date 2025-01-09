@@ -58,7 +58,6 @@
       next();
       };
 
-      app.use(redirectHttps);
-      
+      app.use(redirectHttps);      
       ```
    
