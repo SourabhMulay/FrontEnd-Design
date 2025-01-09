@@ -34,3 +34,19 @@
    });
    
    ```
+
+4. X-Xss-Protection:
+   I will just block the external scripts.
+
+5. HSTS (Strict transport security Header):
+      This header is interesting,  Consider you have an application which is running on HTTPS and also have on http. Now We want the req coming from http to be redirected to              https.So we don;t want to serve the not secure application at all.
+
+      considering following example:
+
+      Browser sending request to server which is http and Now when it will reach out to our server 1st time.....(Remember 1st time). Then the server will check if it's 1st time then
+      The server will sent the header "Strict-Transport-Security-Header" to client.
+
+      So now for every Subsequent request sending from browser to http then that header was already set and browser will understood itself and directly redirect to https.
+
+
+   
